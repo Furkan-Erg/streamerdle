@@ -56,7 +56,7 @@ export const streamerList = [
   },
   {
     nickName: "Mithrain",
-    name: "Eray Gündoğdu",
+    name: "Cem Karakoç",
     followerCount: 2200000,
     category: "E-Spor",
     img: mithrain,
