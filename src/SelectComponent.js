@@ -10,7 +10,8 @@ export default function SelectComponent({ optionsArray }) {
       id="select-component"
       disableClearable
       options={optionsArray.map(
-        (option) => option.name + ` (${option.nickName})`
+        (option) =>
+          (option.name ?? "") + (option.nickName ? ` (${option.nickName})` : "")
       )}
       renderInput={(params) => (
         <TextField
