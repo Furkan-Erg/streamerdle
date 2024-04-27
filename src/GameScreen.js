@@ -7,10 +7,10 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteIconOutlined from "@mui/icons-material/FavoriteBorder";
 
 export default function GameScreen() {
-  const [guessHistory, setguessHistory] = useState(["wtcn", "ben", "sen"]);
+  const [guessHistory, setguessHistory] = useState([]);
   const [selectedStreamer, setSelectedStreamer] = useState("");
-  const [life, setLife] = useState(3);
-  const [correctAnswer, setCorrectAnswer] = useState(streamerList[1]);
+  const [life, setLife] = useState(4);
+  const [correctAnswer, setCorrectAnswer] = useState(streamerList[2]);
   const handleSelectionChange = (value) => {
     console.log(value);
     setSelectedStreamer(value);

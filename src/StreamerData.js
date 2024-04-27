@@ -1,4 +1,13 @@
+import elraenn from "./assets/streamer-pictures/elraenn.jpg";
 import wtcn from "./assets/streamer-pictures/wtcn.jpg";
+import kendineMuzisyen from "./assets/streamer-pictures/kendine-muzisyen.jpg";
+import pqueen from "./assets/streamer-pictures/pqueen.jpg";
+import unlost from "./assets/streamer-pictures/unlost.jpg";
+import jahrein from "./assets/streamer-pictures/jahrein.jpg";
+import mithrain from "./assets/streamer-pictures/mithrain.jpg";
+import elwind from "./assets/streamer-pictures/elwind.jpg";
+
+import reynmen from "./assets/streamer-pictures/reynmen.jpg";
 export const streamerList = [
   {
     nickName: "Elraenn",
@@ -6,6 +15,7 @@ export const streamerList = [
     followerCount: 3700000,
     birthYear: 1994,
     category: "E-Spor",
+    img: elraenn,
   },
   {
     nickName: "wtcN",
@@ -21,36 +31,42 @@ export const streamerList = [
     followerCount: 2700000,
     birthYear: 1992,
     category: "Müzik",
+    img: kendineMuzisyen,
   },
   {
     nickName: "Pqueen",
     name: "Pelin Baynazoğlu",
     followerCount: 2500000,
     category: "Sohbet",
+    img: pqueen,
   },
   {
     nickName: "UNLOSTV",
     name: "Cantuğ Özsoy",
     followerCount: 2400000,
     category: "E-Spor",
+    img: unlost,
   },
   {
     nickName: "Jahrein",
     name: "Ahmet Sonuç",
     followerCount: 2300000,
     category: "Sohbet",
+    img: jahrein,
   },
   {
     nickName: "Mithrain",
     name: "Eray Gündoğdu",
     followerCount: 2200000,
     category: "E-Spor",
+    img: mithrain,
   },
   {
     nickName: "Elwind",
     name: "Emre Yılmaz",
     followerCount: 2100000,
     category: "E-Spor",
+    img: elwind,
   },
   {
     nickName: "Levo",
