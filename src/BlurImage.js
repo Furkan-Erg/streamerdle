@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
 const BlurImage = ({ imageSrc }) => {
   return (
     <div
-      className={`bg-[url("./assets/wtcn.jpg")] bg-cover bg-center bg-no-repeat`}
+      className={`w-48 h-48 bg-[url("./assets/wtcn.jpg")] bg-cover bg-center bg-no-repeat`}
     >
-      <GridColumn
+      {/* <GridColumn
         gridItem={<GridRow gridItem={<GridColumn gridItem={<BlurItem />} />} />}
-      />
+      /> */}
       <div />
     </div>
   );
