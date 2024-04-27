@@ -1,7 +1,8 @@
 const BlurImage = ({ imageSrc }) => {
   return (
     <div
-      className={`w-48 h-48 bg-[url("./assets/wtcn.jpg")] bg-cover bg-center bg-no-repeat`}
+      style={{ backgroundImage: `url(${imageSrc})` }}
+      className={`w-48 h-48  bg-cover bg-center bg-no-repeat`}
     >
       {/* <GridColumn
         gridItem={<GridRow gridItem={<GridColumn gridItem={<BlurItem />} />} />}

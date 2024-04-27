@@ -1,8 +1,15 @@
-import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { useState } from "react";
 
-export default function SelectComponent({ optionsArray }) {
+export default function SelectComponent({
+  optionsArray,
+  onSelectionChange,
+  selectedValue,
+}) {
+  const handleSelectionChange = (event, value) => {
+    onSelectionChange(value);
+  };
   return (
     <Autocomplete
       className="w-72"
@@ -13,6 +20,8 @@ export default function SelectComponent({ optionsArray }) {
         (option) =>
           (option.name ?? "") + (option.nickName ? ` (${option.nickName})` : "")
       )}
+      onChange={handleSelectionChange}
+      value={selectedValue}
       renderInput={(params) => (
         <TextField
           {...params}

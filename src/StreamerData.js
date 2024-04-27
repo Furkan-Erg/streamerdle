@@ -1,3 +1,4 @@
+import wtcn from "./assets/streamer-pictures/wtcn.jpg";
 export const streamerList = [
   {
     nickName: "Elraenn",
@@ -12,6 +13,7 @@ export const streamerList = [
     followerCount: 2900000,
     birthYear: 1991,
     category: "E-Spor",
+    img: wtcn,
   },
   {
     nickName: "KendineMuzisyen",
