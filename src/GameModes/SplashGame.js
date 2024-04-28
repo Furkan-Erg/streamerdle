@@ -10,22 +10,24 @@ import { useKeys } from "rooks";
 export default function SplashGame() {
   const [guessHistory, setguessHistory] = useState([]);
   const [selectedStreamer, setSelectedStreamer] = useState("");
-  const [life, setLife] = useState(6);
+  const [life, setLife] = useState(4);
   const [correctAnswer, setCorrectAnswer] = useState(
     streamerList[Math.floor(Math.random() * streamerList.length)]
   );
   const [tileNumberToUnblur, setTileNumberToUnblur] = useState(
-    Math.floor(Math.random() * 16)
+    Math.floor(Math.random() * 9)
   );
   const [gameState, setGameState] = useState(GameStates.PLAYING);
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+  const [unbluredTiles, setUnbluredTiles] = useState([]);
   const setRandomNumber = () => {
-    var randomNumber = Math.floor(Math.random() * 16);
-    if (randomNumber === tileNumberToUnblur) {
+    var randomNumber = Math.floor(Math.random() * 9);
+    if (unbluredTiles.includes(randomNumber)) {
       setRandomNumber();
     } else {
       setTileNumberToUnblur(randomNumber);
+      setUnbluredTiles((prev) => [...prev, randomNumber]);
     }
   };
   const setRandomStreamer = () => {
@@ -61,8 +63,9 @@ export default function SplashGame() {
       streamerList[Math.floor(Math.random() * streamerList.length)]
     );
     setguessHistory([]);
-    setLife(6);
+    setLife(4);
     setGameState(GameStates.PLAYING);
+    setUnbluredTiles([]);
   };
   const handlePlayAgain = () => {
     resetGame();
@@ -91,7 +94,7 @@ export default function SplashGame() {
       {gameState !== GameStates.PLAYING && (
         <div>
           {gameState === GameStates.LOST && (
-            <div>
+            <div className="text-white font-bold">
               <h1>Doğru Cevap: </h1>
               <div className="text-3xl ">{correctAnswer.name}</div>
             </div>
@@ -111,18 +114,24 @@ export default function SplashGame() {
       )}
       {gameState === GameStates.PLAYING && (
         <div>
-          <div className="flex justify-center items-center gap-2">
+          <div className="flex justify-center flex-col md:flex-row  items-center gap-2">
             <SelectComponent
               optionsArray={streamerList}
               onSelectionChange={handleSelectionChange}
               selectedValue={selectedStreamer}
             />
-            <Button variant="contained" color="secondary" onClick={handleSkip}>
-              Geç
-            </Button>
-            <Button variant="contained" color="success" onClick={handleGuess}>
-              Tahmin et
-            </Button>
+            <div className="flex flex-row gap-2">
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={handleSkip}
+              >
+                Geç
+              </Button>
+              <Button variant="contained" color="success" onClick={handleGuess}>
+                Tahmin et
+              </Button>
+            </div>
           </div>
           <div
             id="guess-history"
@@ -131,7 +140,7 @@ export default function SplashGame() {
             {guessHistory.map((answer, index) => (
               <div
                 key={index}
-                className="bg-red-500 shadow-md p-2 rounded-lg w-48"
+                className="bg-red-500 text-white font-bold shadow-md p-2 rounded-lg w-48"
               >
                 {answer}
               </div>
@@ -145,7 +154,7 @@ export default function SplashGame() {
               {[...Array(life)].map((_, index) => (
                 <FavoriteIcon color="error" key={index} />
               ))}
-              {[...Array(6 - life)].map((_, index) => (
+              {[...Array(4 - life)].map((_, index) => (
                 <FavoriteIconOutlined color="error" key={index} />
               ))}
             </div>
