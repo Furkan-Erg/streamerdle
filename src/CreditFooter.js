@@ -1,6 +1,7 @@
 import React from "react";
 import { Email, GitHub, Instagram, LinkedIn } from "@mui/icons-material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { IconButton } from "@mui/material";
 
 export default function CreditFooter() {
   return (
@@ -9,10 +10,35 @@ export default function CreditFooter() {
         <div className="text-base">Made by:</div>
         <div className="animate-bounce font-bold">Furkan Ergüldürenler</div>
         <FavoriteIcon color="error" className="animate-pulse " />
-        <Instagram />
-        <LinkedIn />
-        <GitHub />
-        <Email />
+        <IconButton
+          href="https://www.instagram.com/erg09/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Instagram />
+        </IconButton>
+        <IconButton
+          href="https://www.linkedin.com/in/furkan-erguldurenler/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <LinkedIn />
+        </IconButton>
+        <IconButton
+          href="https://github.com/Furkan-Erg"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <GitHub />
+        </IconButton>
+
+        <IconButton
+          href="mailto:furkanerguldurenler@hotmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Email />
+        </IconButton>
       </div>
     </div>
   );

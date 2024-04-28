@@ -6,6 +6,16 @@ import unlost from "./assets/streamer-pictures/unlost.jpg";
 import jahrein from "./assets/streamer-pictures/jahrein.jpg";
 import mithrain from "./assets/streamer-pictures/mithrain.jpg";
 import elwind from "./assets/streamer-pictures/elwind.jpg";
+import levo from "./assets/streamer-pictures/levo.jpg";
+import bege from "./assets/streamer-pictures/bege.jpg";
+import hasanAbi from "./assets/streamer-pictures/hasanabi.jpg";
+import enesBatur from "./assets/streamer-pictures/enesbatur.jpg";
+import orkun from "./assets/streamer-pictures/orkun.jpg";
+import ruhicenet from "./assets/streamer-pictures/ruhicenet.jpg";
+import oguzhanUgur from "./assets/streamer-pictures/oguzhanugur.jpg";
+import barisOzcan from "./assets/streamer-pictures/barisozcan.jpg";
+import danlaBilic from "./assets/streamer-pictures/danlabilic.jpg";
+import merveOzkaynak from "./assets/streamer-pictures/merveozkaynak.jpg";
 
 import reynmen from "./assets/streamer-pictures/reynmen.jpg";
 export const streamerList = [
@@ -63,113 +73,78 @@ export const streamerList = [
   },
   {
     nickName: "Elwind",
-    name: "Emre Yılmaz",
+    name: "Kaan Atıcı",
     followerCount: 2100000,
     category: "E-Spor",
     img: elwind,
   },
   {
     nickName: "Levo",
-    name: "Levent Özer",
+    name: "Levent Balım",
     followerCount: 1900000,
     category: "E-Spor",
-  },
-  {
-    name: "Seren Sarikaya",
-    followerCount: 1800000,
-    category: "Müzik",
-  },
-  {
-    name: "Uğur Çiftçi",
-    followerCount: 1700000,
-    category: "E-Spor",
+    img: levo,
   },
   {
     name: "Berkcan Güven",
     followerCount: 1600000,
     category: "Sohbet",
-  },
-  {
-    nickName: "TheRealUfuk",
-    name: "Ufuk Öztürk",
-    followerCount: 1500000,
-    category: "Sanat & El Sanatları",
-  },
-  {
-    nickName: "Barbaros",
-    name: "Barbaros Yavuz",
-    followerCount: 1400000,
-    category: "MMO",
-  },
-  {
-    nickName: "Woahzelot",
-    name: "Çağrı Kocabaş",
-    followerCount: 1300000,
-    category: "MMO",
+    img: bege,
   },
   {
     nickName: "HasanAbi",
-    name: "Hasan Peker",
+    name: "Hasan Doğan Piker",
     followerCount: 1200000,
     category: "E-Spor",
-  },
-  {
-    name: "Esra Ayyıldız",
-    followerCount: 1100000,
-    category: "Sohbet",
+    img: hasanAbi,
   },
   {
     name: "Enes Batur",
     followerCount: 18900000,
     birthYear: 1996,
     category: "Komedi, Oyun",
+    img: enesBatur,
   },
   {
     name: "Orkun Işıtmak",
     followerCount: 15400000,
     birthYear: 1988,
     category: "Komedi, Sketç",
+    img: orkun,
   },
   {
     name: "Ruhi Çenet",
     followerCount: 14100000,
     birthYear: 1982,
     category: "Eğlence, Sohbet",
+    img: ruhicenet,
   },
   {
     name: "Oğuzhan Uğur",
     followerCount: 13900000,
     birthYear: 1993,
     category: "Komedi, Vlog",
+    img: oguzhanUgur,
   },
   {
     name: "Barış Özcan",
     followerCount: 12900000,
     birthYear: 1986,
     category: "Sohbet, Röportaj",
+    img: barisOzcan,
   },
   {
     name: "Danla Bilic",
     followerCount: 12700000,
     birthYear: 1994,
     category: "Moda, Güzellik",
+    img: danlaBilic,
   },
   {
     name: "Merve Özkaynak",
     followerCount: 12400000,
     birthYear: 1991,
     category: "Müzik",
-  },
-  {
-    name: "Burak Yılmaz",
-    followerCount: 12200000,
-    birthYear: 1985,
-    category: "Futbol",
-  },
-  {
-    name: "Batuhan Karadeniz",
-    followerCount: 11900000,
-    birthYear: 1992,
-    category: "Komedi, Sketç",
+    img: merveOzkaynak,
   },
 ];

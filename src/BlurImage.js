@@ -48,7 +48,7 @@ const BlurImage = ({ imageSrc, tileNumber, gameState }) => {
     <div>
       <div
         style={{ backgroundImage: `url(${imageSrc})` }}
-        className={`bg-cover bg-center bg-no-repeat`}
+        className={`bg-cover bg-center bg-no-repeat w-96 h-96 relative`}
       >
         {blurTiles}
         <div />

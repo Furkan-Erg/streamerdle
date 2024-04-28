@@ -10,23 +10,40 @@ import CreditFooter from "./CreditFooter";
 export default function GameScreen() {
   const [guessHistory, setguessHistory] = useState([]);
   const [selectedStreamer, setSelectedStreamer] = useState("");
-  const [life, setLife] = useState(4);
-  const [correctAnswer, setCorrectAnswer] = useState(streamerList[2]);
+  const [life, setLife] = useState(6);
+  const [correctAnswer, setCorrectAnswer] = useState(
+    streamerList[Math.floor(Math.random() * streamerList.length)]
+  );
   const [tileNumberToUnblur, setTileNumberToUnblur] = useState(
-    Math.floor(Math.random() * 8) + 1
+    Math.floor(Math.random() * 16)
   );
   const [gameState, setGameState] = useState(GameStates.PLAYING);
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+  const setRandomNumber = () => {
+    var randomNumber = Math.floor(Math.random() * 16);
+    if (randomNumber === tileNumberToUnblur) {
+      setRandomNumber();
+    } else {
+      setTileNumberToUnblur(randomNumber);
+    }
+  };
+  const setRandomStreamer = () => {
+    var randomStreamer =
+      streamerList[Math.floor(Math.random() * streamerList.length)];
+    if (randomStreamer === correctAnswer) {
+      setRandomStreamer();
+    } else {
+      setCorrectAnswer(randomStreamer);
+    }
+  };
 
   const handleSelectionChange = (value) => {
     setSelectedStreamer(value);
   };
   const handleSkip = () => {
     setLife((prev) => prev - 1);
-    var randomNumber = Math.floor(Math.random() * 8) + 1;
-    console.log("random number", randomNumber);
-    setTileNumberToUnblur(randomNumber);
+    setRandomNumber();
   };
   const handleGuess = () => {
     if (selectedStreamer.includes(correctAnswer.name)) {
@@ -35,8 +52,7 @@ export default function GameScreen() {
     } else {
       setLife((prev) => prev - 1);
       setguessHistory((prev) => [...prev, selectedStreamer]);
-      var randomNumber = Math.floor(Math.random() * 8) + 1;
-      setTileNumberToUnblur(randomNumber);
+      setRandomNumber();
     }
     setSelectedStreamer("");
   };
@@ -45,7 +61,7 @@ export default function GameScreen() {
       streamerList[Math.floor(Math.random() * streamerList.length)]
     );
     setguessHistory([]);
-    setLife(4);
+    setLife(6);
     setGameState(GameStates.PLAYING);
   };
   const handlePlayAgain = () => {
@@ -78,11 +94,15 @@ export default function GameScreen() {
               <div className="text-3xl ">{correctAnswer.name}</div>
             </div>
           )}
-          <div className="flex flex-row justify-center items-center">
+          <div className="flex flex-row justify-center items-center my-2">
             {gameState === GameStates.LOST ? (
-              <Button onClick={handlePlayAgain}>Tekrar Oyna</Button>
+              <Button onClick={handlePlayAgain} variant="contained">
+                Tekrar Oyna
+              </Button>
             ) : (
-              <Button onClick={handleNextGame}>Sıradaki Kişi</Button>
+              <Button onClick={handleNextGame} variant="contained">
+                Sıradaki Kişi
+              </Button>
             )}
           </div>
         </div>
@@ -120,7 +140,7 @@ export default function GameScreen() {
               {[...Array(life)].map((_, index) => (
                 <FavoriteIcon color="error" key={index} />
               ))}
-              {[...Array(4 - life)].map((_, index) => (
+              {[...Array(6 - life)].map((_, index) => (
                 <FavoriteIconOutlined color="error" key={index} />
               ))}
             </div>
