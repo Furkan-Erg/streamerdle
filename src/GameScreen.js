@@ -5,6 +5,7 @@ import { streamerList } from "./StreamerData";
 import Button from "@mui/material/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteIconOutlined from "@mui/icons-material/FavoriteBorder";
+import CreditFooter from "./CreditFooter";
 
 export default function GameScreen() {
   const [guessHistory, setguessHistory] = useState([]);
@@ -103,7 +104,7 @@ export default function GameScreen() {
           </div>
           <div
             id="guess-history"
-            className="flex justify-center items-center flex-col gap-2"
+            className="flex justify-center items-center flex-col gap-2 my-2"
           >
             {guessHistory.map((answer) => (
               <div className="bg-red-500 shadow-md p-2 rounded-lg w-48">
@@ -126,10 +127,11 @@ export default function GameScreen() {
 
             <h1>Kalan can: {life}</h1>
             <div className="flex gap-4">
-              <span>Mevcut skor:{currentScore}</span>
-              <span>Rekor skor:{bestScore}</span>
+              <span>Mevcut skor: {currentScore}</span>
+              <span>Rekor skor: {bestScore}</span>
             </div>
           </div>
+          <CreditFooter />
         </div>
       )}
     </div>

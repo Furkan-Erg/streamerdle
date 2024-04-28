@@ -53,7 +53,6 @@ const BlurImage = ({ imageSrc, tileNumber, gameState }) => {
         {blurTiles}
         <div />
       </div>
-      <button onClick={unBlurCell}>Unblur</button>
     </div>
   );
 };
