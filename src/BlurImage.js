@@ -4,29 +4,29 @@ const BlurImage = ({ imageSrc, tileNumber, gameState }) => {
   const [tileNumberToUnblur, setTileNumberToUnblur] = useState(tileNumber);
   //unblur the image
   const unBlur = () => {
-    const blurTiles = document.querySelectorAll(".backdrop-blur-3xl");
+    const blurTiles = document.querySelectorAll(".backdrop-blur");
     blurTiles.forEach((tile) => {
-      tile.classList.remove("backdrop-blur-3xl");
+      tile.classList.remove("backdrop-blur");
     });
   };
   // i need a function that unblurs only the one cell
   const unBlurCell = () => {
     console.log("tilenumbertounblur", tileNumberToUnblur);
     // unblur the cells beetwen index*10 and index*10+10
-    const blurTiles = document.querySelectorAll(".backdrop-blur-3xl");
+    const blurTiles = document.querySelectorAll(".backdrop-blur");
     blurTiles.forEach((tile, index) => {
       if (
         index > tileNumberToUnblur * 16 - 1 &&
         index < (tileNumberToUnblur + 1) * 16
       ) {
-        tile.classList.remove("backdrop-blur-3xl");
+        tile.classList.remove("backdrop-blur");
       }
     });
   };
   const blurCells = () => {
     const blurTiles = document.querySelectorAll(".w-6.h-6");
     blurTiles.forEach((tile, index) => {
-      tile.classList.add("backdrop-blur-3xl");
+      tile.classList.add("backdrop-blur");
     });
   };
   useEffect(() => {
@@ -63,7 +63,7 @@ const blurTiles = (
         {[...Array(16)].map((_, findex) => (
           <div
             key={index * 16 + findex}
-            className=" backdrop-blur-3xl w-6 h-6"
+            className=" backdrop-blur w-6 h-6"
           ></div>
         ))}
       </div>
