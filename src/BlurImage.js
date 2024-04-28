@@ -2,16 +2,13 @@ import { useEffect, useState } from "react";
 import { GameStates } from "./GameModes/SplashGame";
 const BlurImage = ({ imageSrc, tileNumber, gameState }) => {
   const [tileNumberToUnblur, setTileNumberToUnblur] = useState(tileNumber);
-  //unblur the image
   const unBlur = () => {
     const blurTiles = document.querySelectorAll(".backdrop-blur-xl");
     blurTiles.forEach((tile) => {
       tile.classList.remove("backdrop-blur-xl");
     });
   };
-  // i need a function that unblurs only the one cell
   const unBlurCell = () => {
-    // unblur the cells beetwen index*10 and index*10+10
     const blurTiles = document.querySelectorAll(".backdrop-blur-xl");
     blurTiles.forEach((tile, index) => {
       if (
