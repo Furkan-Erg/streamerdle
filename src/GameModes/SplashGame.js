@@ -128,8 +128,11 @@ export default function SplashGame() {
             id="guess-history"
             className="flex justify-center items-center flex-col gap-2 my-2"
           >
-            {guessHistory.map((answer) => (
-              <div className="bg-red-500 shadow-md p-2 rounded-lg w-48">
+            {guessHistory.map((answer, index) => (
+              <div
+                key={index}
+                className="bg-red-500 shadow-md p-2 rounded-lg w-48"
+              >
                 {answer}
               </div>
             ))}

@@ -124,7 +124,7 @@ function ClassicGame() {
                   } flip-3 w-full h-full flex justify-center items-center`}
                 >
                   {streamer.followerCount === correctAnswer.followerCount ? (
-                    streamer.followerCount
+                    formatNumber(streamer.followerCount)
                   ) : (
                     <div
                       style={{
@@ -136,7 +136,7 @@ function ClassicGame() {
                       }}
                       className={`bg-cover bg-center bg-no-repeat w-16 h-16 flex justify-center items-center`}
                     >
-                      {streamer.followerCount}
+                      {formatNumber(streamer.followerCount)}
                     </div>
                   )}
                 </div>
@@ -191,6 +191,16 @@ function ClassicGame() {
       </div>
     </div>
   );
+}
+function formatNumber(num) {
+  var suffixes = ["", "k", "m", "b", "t"];
+
+  if (num >= 1000) {
+    var suffixIndex = Math.floor(Math.log10(num) / 3);
+    var shortNum = (num / Math.pow(10, suffixIndex * 3)).toFixed(1);
+    return shortNum + suffixes[suffixIndex];
+  }
+  return num.toString();
 }
 
 export default ClassicGame;
