@@ -7,11 +7,32 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "./HomePage";
+import ClassicGame from "./GameModes/ClassicGame";
+import SplashGame from "./SplashGame";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "classic",
+    element: <ClassicGame />,
+  },
+  {
+    path: "splash",
+    element: <SplashGame />,
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <App>
+      <RouterProvider router={router} />
+    </App>
   </React.StrictMode>
 );
 

@@ -7,7 +7,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteIconOutlined from "@mui/icons-material/FavoriteBorder";
 import CreditFooter from "./CreditFooter";
 
-export default function GameScreen() {
+export default function SplashGame() {
   const [guessHistory, setguessHistory] = useState([]);
   const [selectedStreamer, setSelectedStreamer] = useState("");
   const [life, setLife] = useState(6);
@@ -78,9 +78,8 @@ export default function GameScreen() {
   }, [life]);
 
   return (
-    <div className=" flex  justify-center items-center flex-col gap-6">
+    <div className=" flex  h-dvh justify-center items-center flex-col gap-6">
       {gameState === GameStates.LOST && <GameOverScreen />}
-      <div className="game-screen">GameScreen</div>
       <BlurImage
         imageSrc={correctAnswer.img}
         tileNumber={tileNumberToUnblur}
@@ -134,7 +133,7 @@ export default function GameScreen() {
           </div>
           <div
             id="life-count"
-            className="flex flex-col justify-center items-center my-4"
+            className="flex flex-col justify-center items-center my-4 text-white font-bold"
           >
             <div>
               {[...Array(life)].map((_, index) => (

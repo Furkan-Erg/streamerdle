@@ -1,13 +1,21 @@
-import logo from "./logo.svg";
 import "./App.css";
-import GameScreen from "./GameScreen";
-import HomePage from "./HomePage";
-import ClassicGame from "./GameModes/ClassicGame";
+import background from "./assets/background-alt.jpg";
 
-function App() {
-  // return <GameScreen />;
-  // return <HomePage />;
-  return <ClassicGame />;
+function App({ children }) {
+  return (
+    <div
+      className="bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: `url(${background})`,
+      }}
+    >
+      <div className="backdrop-blur-md backdrop-brightness-50">
+        {{
+          ...children,
+        }}
+      </div>
+    </div>
+  );
 }
 
 export default App;

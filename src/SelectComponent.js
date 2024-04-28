@@ -12,7 +12,7 @@ export default function SelectComponent({
   };
   return (
     <Autocomplete
-      className="w-72"
+      className="w-96"
       freeSolo
       id="select-component"
       disableClearable
@@ -25,10 +25,13 @@ export default function SelectComponent({
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Yayıncı arayın"
           InputProps={{
             ...params.InputProps,
             type: "search",
+          }}
+          style={{
+            backgroundColor: "white",
+            borderRadius: "5px",
           }}
         />
       )}

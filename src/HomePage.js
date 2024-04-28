@@ -2,15 +2,15 @@ import React from "react";
 
 function HomePage() {
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center h-dvh">
       <div className="flex flex-col justify-center items-center gap-4">
-        <div className="text-xl font-bold">
+        <div className="text-xl font-bold text-white">
           Ünlü Türk Influencer'ları tahmin et!
         </div>
 
         <div className="flex flex-col gap-4">
           <CustomButton
-            title={"klasik"}
+            title={"Klasik"}
             description={"Her denemede ipucu al"}
             url={"/classic"}
           />

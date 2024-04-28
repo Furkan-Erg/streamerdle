@@ -94,7 +94,7 @@ export const streamerList = [
   {
     img: bege,
     name: "Berkcan Güven",
-    nickName: null,
+    nickName: "Bege",
     followerCount: "3m",
     birthYear: 1996,
     category: ["Müzik", "Eğlence"],
@@ -144,7 +144,7 @@ export const streamerList = [
     name: "Oğuzhan Uğur",
     nickName: null,
     followerCount: "6.8m",
-    birthYear: 1993,
+    birthYear: 1984,
     category: ["Siyaset", "Eğlence"],
   },
   {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GameStates } from "./GameScreen";
+import { GameStates } from "./SplashGame";
 const BlurImage = ({ imageSrc, tileNumber, gameState }) => {
   const [tileNumberToUnblur, setTileNumberToUnblur] = useState(tileNumber);
   //unblur the image
