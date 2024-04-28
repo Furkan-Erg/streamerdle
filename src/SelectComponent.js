@@ -12,7 +12,7 @@ export default function SelectComponent({
   };
   return (
     <Autocomplete
-      className="w-96"
+      className="w-[19rem] md:w-96"
       freeSolo
       id="select-component"
       disableClearable

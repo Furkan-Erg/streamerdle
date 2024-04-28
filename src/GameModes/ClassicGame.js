@@ -53,7 +53,7 @@ function ClassicGame() {
 
   return (
     <div className="flex   justify-center items-center flex-col gap-6 h-dvh content-center ">
-      <div className="bg-blue-900 border-4 border-black text-white text-xl text-bold rounded-lg py-4 px-8 text-center">
+      <div className="bg-blue-900 border-4 border-black text-white text-base md:text-xl text-bold rounded-lg py-4 px-8 text-center -mt-16  md:mt-72">
         <div>Bugünün influencer'ı kim?</div>
         <div className="opacity-50 ">
           Başlamak için herhangi bir influencer adı yaz.
@@ -64,7 +64,6 @@ function ClassicGame() {
           optionsArray={streamerList}
           onSelectionChange={handleSelectionChange}
           selectedValue={selectedStreamer}
-          width="w-96"
         />
         <button
           onClick={handleGuess}
@@ -73,7 +72,7 @@ function ClassicGame() {
           <Send fontSize="medium" className="ml-1" />
         </button>
       </div>
-      <div className="flex flex-col gap-2 h-24">
+      <div className="flex flex-col gap-2 h-[25rem] md:h-80 overflow-y-auto">
         <div className="flex flex-row gap-1 ">
           {informationNames.map((name) => (
             <div className=" text-white text-bold text-center w-20 h-8 border-b-2  border-white ">
@@ -92,14 +91,14 @@ function ClassicGame() {
           {guessHistory.map((streamer, index) => (
             <div
               key={index}
-              className="mb-4  flex flex-row gap-1 text-white text-sm font-semibold text-center"
+              className="mb-4  flex flex-row mx-[0.65rem] md:mx-0 gap-[0.60rem] md:gap-1 text-white text-sm font-semibold text-center"
             >
-              <div className="border-4 border-black rounded-lg w-20 h-20 overflow-hidden">
+              <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
                 <div className="flip-1 bg-blue-900 w-full h-full flex justify-center items-center">
                   {streamer.name}
                 </div>
               </div>
-              <div className="border-4 border-black rounded-lg w-20 h-20 overflow-hidden">
+              <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
                 <div
                   className={`${
                     correctAnswer.nickName
@@ -115,7 +114,7 @@ function ClassicGame() {
                 </div>
               </div>
 
-              <div className="border-4 border-black rounded-lg w-20 h-20 overflow-hidden">
+              <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
                 <div
                   className={`${
                     correctAnswer.followerCount === streamer.followerCount
@@ -141,7 +140,7 @@ function ClassicGame() {
                   )}
                 </div>
               </div>
-              <div className="border-4 border-black rounded-lg w-20 h-20 overflow-hidden">
+              <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
                 <div
                   className={`${
                     correctAnswer.birthYear === streamer.birthYear
@@ -167,7 +166,7 @@ function ClassicGame() {
                   )}
                 </div>
               </div>
-              <div className="border-4 border-black rounded-lg w-20 h-20 overflow-hidden">
+              <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
                 <div
                   className={`${
                     correctAnswer.category.toString() ===

@@ -20,7 +20,7 @@ const BlurImage = ({ imageSrc, tileNumber, gameState }) => {
     });
   };
   const blurCells = () => {
-    const blurTiles = document.querySelectorAll(".w-12.h-12");
+    const blurTiles = document.querySelectorAll(".w-10.h-10");
     blurTiles.forEach((tile, index) => {
       tile.classList.add("backdrop-blur-xl");
     });
@@ -44,7 +44,7 @@ const BlurImage = ({ imageSrc, tileNumber, gameState }) => {
     <div>
       <div
         style={{ backgroundImage: `url(${imageSrc})` }}
-        className={`bg-cover bg-center bg-no-repeat w-[27rem] h-[27rem] relative`}
+        className={`bg-cover bg-center bg-no-repeat w-[22.5rem] h-[22.5rem] relative`}
       >
         {blurTiles}
         <div />
@@ -53,11 +53,11 @@ const BlurImage = ({ imageSrc, tileNumber, gameState }) => {
   );
 };
 const blurTiles = (
-  <div className="grid grid-cols-3 grid-rows-3 w-[27rem] h-[27rem]">
+  <div className="grid grid-cols-3 grid-rows-3 w-[22.5rem] h-[22.5rem]">
     {[...Array(9)].map((_, index) => (
       <div key={index} className="grid grid-cols-3 grid-rows-3">
         {[...Array(9)].map((_, findex) => (
-          <div key={index * 9 + findex} className=" w-12 h-12"></div>
+          <div key={index * 9 + findex} className=" w-10 h-10"></div>
         ))}
       </div>
     ))}

@@ -4,7 +4,7 @@ import CreditFooter from "./Components/CreditFooter";
 function App({ children }) {
   return (
     <div
-      className="bg-cover bg-center bg-no-repeat "
+      className="bg-cover bg- bg-no-repeat bg-fixed "
       style={{
         backgroundImage: `url(${background})`,
       }}
