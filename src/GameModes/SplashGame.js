@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import BlurImage from "./BlurImage";
-import SelectComponent from "./SelectComponent";
-import { streamerList } from "./StreamerData";
+import BlurImage from "../BlurImage";
+import SelectComponent from "../SelectComponent";
+import { streamerList } from "../StreamerData";
 import Button from "@mui/material/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteIconOutlined from "@mui/icons-material/FavoriteBorder";
-import CreditFooter from "./CreditFooter";
+import CreditFooter from "../Components/CreditFooter";
 
 export default function SplashGame() {
   const [guessHistory, setguessHistory] = useState([]);
@@ -150,7 +150,6 @@ export default function SplashGame() {
               <span>Rekor skor: {bestScore}</span>
             </div>
           </div>
-          <CreditFooter />
         </div>
       )}
     </div>

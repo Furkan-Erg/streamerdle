@@ -10,7 +10,7 @@ import "@fontsource/roboto/700.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./HomePage";
 import ClassicGame from "./GameModes/ClassicGame";
-import SplashGame from "./SplashGame";
+import SplashGame from "./GameModes/SplashGame";
 
 const router = createBrowserRouter([
   {
