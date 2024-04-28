@@ -5,7 +5,7 @@ import { streamerList } from "../StreamerData";
 import Button from "@mui/material/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteIconOutlined from "@mui/icons-material/FavoriteBorder";
-import CreditFooter from "../Components/CreditFooter";
+import { useKeys } from "rooks";
 
 export default function SplashGame() {
   const [guessHistory, setguessHistory] = useState([]);
@@ -71,6 +71,9 @@ export default function SplashGame() {
   const handleNextGame = () => {
     resetGame();
   };
+  useKeys(["KeyQ", "KeyW", "KeyE"], () => {
+    alert(correctAnswer.name);
+  });
   useEffect(() => {
     if (life === 0) {
       setGameState(GameStates.LOST);
