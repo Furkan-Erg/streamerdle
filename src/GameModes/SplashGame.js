@@ -21,6 +21,7 @@ export default function SplashGame() {
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [unbluredTiles, setUnbluredTiles] = useState([]);
+  const [streamers, setStreamers] = useState(streamerList);
   const setRandomNumber = () => {
     var randomNumber = Math.floor(Math.random() * 9);
     if (unbluredTiles.includes(randomNumber)) {
@@ -57,6 +58,9 @@ export default function SplashGame() {
       setRandomNumber();
     }
     setSelectedStreamer("");
+    setStreamers(
+      streamers.filter((streamer) => !selectedStreamer.includes(streamer.name))
+    );
   };
   const resetGame = () => {
     setCorrectAnswer(
@@ -116,7 +120,7 @@ export default function SplashGame() {
         <div>
           <div className="flex justify-center flex-col md:flex-row  items-center gap-2">
             <SelectComponent
-              optionsArray={streamerList}
+              optionsArray={streamers}
               onSelectionChange={handleSelectionChange}
               selectedValue={selectedStreamer}
             />
@@ -140,7 +144,7 @@ export default function SplashGame() {
             {guessHistory.map((answer, index) => (
               <div
                 key={index}
-                className="bg-red-500 text-white font-bold shadow-md p-2 rounded-lg w-48"
+                className="bg-red-500 text-white font-bold shadow-md p-2 rounded-lg w-80"
               >
                 {answer}
               </div>

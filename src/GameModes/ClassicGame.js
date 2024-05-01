@@ -27,6 +27,7 @@ function ClassicGame() {
     category: "",
     img: "",
   });
+  const [streamers, setStreamers] = useState(streamerList);
 
   const handleSelectionChange = (value) => {
     setSelectedStreamer(value);
@@ -37,7 +38,9 @@ function ClassicGame() {
     } else {
     }
     setguessHistory((prev) => [...prev, selectedStreamerInfo]);
-
+    setStreamers((prev) =>
+      prev.filter((streamer) => streamer.name !== selectedStreamerInfo.name)
+    );
     setSelectedStreamer("");
   };
   useKeys(["KeyQ", "KeyW", "KeyE"], () => {
@@ -61,7 +64,7 @@ function ClassicGame() {
       </div>
       <div className="flex flex-row gap-4">
         <SelectComponent
-          optionsArray={streamerList}
+          optionsArray={streamers}
           onSelectionChange={handleSelectionChange}
           selectedValue={selectedStreamer}
         />
