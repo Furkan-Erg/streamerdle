@@ -70,6 +70,7 @@ export default function SplashGame() {
     setLife(4);
     setGameState(GameStates.PLAYING);
     setUnbluredTiles([]);
+    setStreamers(streamerList);
   };
   const handlePlayAgain = () => {
     resetGame();

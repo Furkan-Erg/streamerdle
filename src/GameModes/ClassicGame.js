@@ -57,13 +57,15 @@ function ClassicGame() {
 
   return (
     <div className="flex   justify-center items-center flex-col gap-6 h-dvh content-center ">
-      <div className="bg-blue-900 border-4 border-black text-white text-base md:text-xl text-bold rounded-lg py-4 px-8 text-center -mt-16  md:mt-72">
-        <div>Bugünün influencer'ı kim?</div>
-        <div className="opacity-50 ">
-          Başlamak için herhangi bir influencer adı yaz.
+      <div className={guessHistory.length > 0 ? "hidden xr:flex" : ""}>
+        <div className="bg-blue-900 border-4 border-black text-white text-sm md:text-xl text-bold rounded-lg py-4 px-8 text-center   ">
+          <div>Bugünün influencer'ı kim?</div>
+          <div className="opacity-50 ">
+            Başlamak için herhangi bir influencer adı yaz.
+          </div>
         </div>
       </div>
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <SelectComponent
           optionsArray={streamers}
           onSelectionChange={handleSelectionChange}
@@ -76,132 +78,132 @@ function ClassicGame() {
           <Send fontSize="medium" className="ml-1" />
         </button>
       </div>
-      <div className="flex flex-col gap-2 h-[25rem] md:h-80 overflow-y-auto">
-        <div className="flex flex-row gap-1 ">
-          {informationNames.map((name) => (
-            <div className=" text-white text-bold text-center w-20 h-8 border-b-2  border-white ">
-              {name}
-              {name === "Mahlas" && (
-                <span className="cursor-pointer ml-1">
-                  <Tooltip title="Influencer'ın Mahlas (Nick name) i var mı?">
-                    <HelpOutline />
-                  </Tooltip>
-                </span>
-              )}
-            </div>
-          ))}
-        </div>
-        <div className=" flex flex-col-reverse gap-1">
-          {guessHistory.map((streamer, index) => (
-            <div
-              key={index}
-              className="mb-4  flex flex-row mx-[0.65rem] md:mx-0 gap-[0.60rem] md:gap-1 text-white text-sm font-semibold text-center"
-            >
-              <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
-                <div className="flip-1 bg-blue-900 w-full h-full flex justify-center items-center">
-                  {streamer.name}
-                </div>
+      <div className={guessHistory.length > 0 ? "" : "hidden xr:flex"}>
+        <div className="flex flex-row md:flex-col gap-2  w-[23rem] md:w-auto md:h-[36rem] overflow-x-auto md:overflow-y-auto ">
+          <div className="flex flex-col md:flex-row gap-1 md:gap-4 ">
+            {informationNames.map((name) => (
+              <div className=" text-white text-bold flex items-center justify-center text-center w-20 h-20 md:h-8 border-2 md:border-0 md:border-b-2  border-white ">
+                {name}
+                {name === "Mahlas" && (
+                  <span className="cursor-pointer ml-1">
+                    <Tooltip title="Influencer'ın Mahlas (Nick name) i var mı?">
+                      <HelpOutline />
+                    </Tooltip>
+                  </span>
+                )}
               </div>
-              <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
-                <div
-                  className={`${
-                    correctAnswer.gender === streamer.gender
-                      ? "bg-green-600"
-                      : "bg-red-600"
-                  } flip-2 w-full h-full flex justify-center items-center`}
-                >
-                  {streamer.gender}
+            ))}
+          </div>
+          <div className=" flex flex-row-reverse md:flex-col-reverse  gap-1">
+            {guessHistory.map((streamer, index) => (
+              <div
+                key={index}
+                className="mb-0 md:mb-4  flex flex-col justify-between  py-1  md:flex-row mx-[0.65rem] md:mx-0 gap-[0.60rem] md:gap-1 text-white text-sm font-semibold text-center"
+              >
+                <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
+                  <div className="flip-1 bg-blue-900 w-full h-full flex justify-center items-center">
+                    {streamer.name}
+                  </div>
                 </div>
-              </div>
-              <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
-                <div
-                  className={`${
-                    correctAnswer.nickName
-                      ? streamer.nickName
+                <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
+                  <div
+                    className={`${
+                      correctAnswer.gender === streamer.gender
                         ? "bg-green-600"
                         : "bg-red-600"
-                      : streamer.nickName
-                      ? "bg-red-600"
-                      : "bg-green-600"
-                  } flip-3 w-full h-full flex justify-center items-center`}
-                >
-                  {streamer.nickName ? "Var" : "Yok"}
+                    } flip-2 w-full h-full flex justify-center items-center`}
+                  >
+                    {streamer.gender}
+                  </div>
                 </div>
-              </div>
+                <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
+                  <div
+                    className={`${
+                      correctAnswer.nickName
+                        ? streamer.nickName
+                          ? "bg-green-600"
+                          : "bg-red-600"
+                        : streamer.nickName
+                        ? "bg-red-600"
+                        : "bg-green-600"
+                    } flip-3 w-full h-full flex justify-center items-center`}
+                  >
+                    {streamer.nickName ? "Var" : "Yok"}
+                  </div>
+                </div>
 
-              <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
-                <div
-                  className={`${
-                    correctAnswer.followerCount === streamer.followerCount
-                      ? "bg-green-600"
-                      : "bg-red-600"
-                  } flip-4 w-full h-full flex justify-center items-center`}
-                >
-                  {streamer.followerCount === correctAnswer.followerCount ? (
-                    formatNumber(streamer.followerCount)
-                  ) : (
-                    <div
-                      style={{
-                        backgroundImage: `url(${
-                          correctAnswer.followerCount > streamer.followerCount
-                            ? upArrow
-                            : downArrow
-                        })`,
-                      }}
-                      className={`bg-cover bg-center bg-no-repeat w-16 h-16 flex justify-center items-center`}
-                    >
-                      {formatNumber(streamer.followerCount)}
-                    </div>
-                  )}
+                <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
+                  <div
+                    className={`${
+                      correctAnswer.followerCount === streamer.followerCount
+                        ? "bg-green-600"
+                        : "bg-red-600"
+                    } flip-4 w-full h-full flex justify-center items-center`}
+                  >
+                    {streamer.followerCount === correctAnswer.followerCount ? (
+                      formatNumber(streamer.followerCount)
+                    ) : (
+                      <div
+                        style={{
+                          backgroundImage: `url(${
+                            correctAnswer.followerCount > streamer.followerCount
+                              ? upArrow
+                              : downArrow
+                          })`,
+                        }}
+                        className={`bg-cover bg-center bg-no-repeat w-16 h-16 flex justify-center items-center`}
+                      >
+                        {formatNumber(streamer.followerCount)}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
+                  <div
+                    className={`${
+                      correctAnswer.birthYear === streamer.birthYear
+                        ? "bg-green-600"
+                        : "bg-red-600"
+                    } flip-5 w-full h-full flex justify-center items-center `}
+                  >
+                    {streamer.birthYear === correctAnswer.birthYear ? (
+                      streamer.birthYear
+                    ) : (
+                      <div
+                        style={{
+                          backgroundImage: `url(${
+                            correctAnswer.birthYear > streamer.birthYear
+                              ? upArrow
+                              : downArrow
+                          })`,
+                        }}
+                        className={`bg-cover bg-center bg-no-repeat w-16 h-16 flex justify-center items-center`}
+                      >
+                        {streamer.birthYear}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
+                  <div
+                    className={`${
+                      correctAnswer.category.toString() ===
+                      streamer.category.toString()
+                        ? "bg-green-600"
+                        : streamer.category.some((category) =>
+                            correctAnswer.category.includes(category)
+                          )
+                        ? "bg-orange-600"
+                        : "bg-red-600"
+                    } flip-6  w-full h-full flex justify-center items-center `}
+                  >
+                    {streamer.category.join(", ")}
+                  </div>
                 </div>
               </div>
-              <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
-                <div
-                  className={`${
-                    correctAnswer.birthYear === streamer.birthYear
-                      ? "bg-green-600"
-                      : "bg-red-600"
-                  } flip-5 w-full h-full flex justify-center items-center `}
-                >
-                  {streamer.birthYear === correctAnswer.birthYear ? (
-                    streamer.birthYear
-                  ) : (
-                    <div
-                      style={{
-                        backgroundImage: `url(${
-                          correctAnswer.birthYear > streamer.birthYear
-                            ? upArrow
-                            : downArrow
-                        })`,
-                      }}
-                      className={`bg-cover bg-center bg-no-repeat w-16 h-16 flex justify-center items-center`}
-                    >
-                      {streamer.birthYear}
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
-                <div
-                  className={`${
-                    correctAnswer.category.toString() ===
-                    streamer.category.toString()
-                      ? "bg-green-600"
-                      : streamer.category.some((category) =>
-                          correctAnswer.category.includes(category)
-                        )
-                      ? "bg-orange-600"
-                      : "bg-red-600"
-                  } flip-6  w-full h-full flex justify-center items-center `}
-                >
-                  {streamer.category.join(", ")}
-                </div>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-
-        {/* {correctAnswer.name} */}
       </div>
     </div>
   );
