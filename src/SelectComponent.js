@@ -16,10 +16,13 @@ export default function SelectComponent({
       freeSolo
       id="select-component"
       disableClearable
-      options={optionsArray.map(
-        (option) =>
-          (option.name ?? "") + (option.nickName ? ` (${option.nickName})` : "")
-      )}
+      options={optionsArray
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(
+          (option) =>
+            (option.name ?? "") +
+            (option.nickName ? ` (${option.nickName})` : "")
+        )}
       onChange={handleSelectionChange}
       value={selectedValue}
       renderInput={(params) => (

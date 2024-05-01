@@ -22,6 +22,7 @@ export const streamerList = [
   {
     img: elraenn,
     name: "Tuğkan Gönültaş",
+    gender: "Erkek",
     nickName: "Elraenn",
     followerCount: "4700000",
     birthYear: 1987,
@@ -30,6 +31,7 @@ export const streamerList = [
   {
     img: wtcn,
     name: "Ferit Karakaya",
+    gender: "Erkek",
     nickName: "wtcN",
     followerCount: 2900000,
     birthYear: 1992,
@@ -38,6 +40,7 @@ export const streamerList = [
   {
     img: kendineMuzisyen,
     name: "Kemal Can Parlak",
+    gender: "Erkek",
     nickName: "KendineMuzisyen",
     followerCount: 2600000,
     birthYear: 1995,
@@ -46,6 +49,7 @@ export const streamerList = [
   {
     img: pqueen,
     name: "Pelin Baynazoğlu",
+    gender: "Kadın",
     nickName: "Pqueen",
     followerCount: 2300000,
     birthYear: 1992,
@@ -54,6 +58,7 @@ export const streamerList = [
   {
     img: unlost,
     name: "Cantuğ Özsoy",
+    gender: "Erkek",
     nickName: "UNLOSTV",
     followerCount: 2200000,
     birthYear: 1990,
@@ -62,6 +67,7 @@ export const streamerList = [
   {
     img: jahrein,
     name: "Ahmet Sonuç",
+    gender: "Erkek",
     nickName: "Jahrein",
     followerCount: 1900000,
     birthYear: 1988,
@@ -70,6 +76,7 @@ export const streamerList = [
   {
     img: mithrain,
     name: "Cem Karakoç",
+    gender: "Erkek",
     nickName: "Mithrain",
     followerCount: 1700000,
     birthYear: 1992,
@@ -78,6 +85,7 @@ export const streamerList = [
   {
     img: elwind,
     name: "Kaan Atıcı",
+    gender: "Erkek",
     nickName: "Elwind",
     followerCount: 999000,
     birthYear: 1993,
@@ -86,6 +94,7 @@ export const streamerList = [
   {
     img: levo,
     name: "Levent Balım",
+    gender: "Erkek",
     nickName: "Levo",
     followerCount: 853000,
     birthYear: 1992,
@@ -94,6 +103,7 @@ export const streamerList = [
   {
     img: bege,
     name: "Berkcan Güven",
+    gender: "Erkek",
     nickName: "Bege",
     followerCount: 3000000,
     birthYear: 1996,
@@ -102,6 +112,7 @@ export const streamerList = [
   {
     img: reynmen,
     name: "Yusuf Aktaş",
+    gender: "Erkek",
     nickName: "Reynmen",
     followerCount: 6800000,
     birthYear: 1995,
@@ -110,6 +121,7 @@ export const streamerList = [
   {
     img: hasanAbi,
     name: "Hasan Doğan Piker",
+    gender: "Erkek",
     nickName: "HasanAbi",
     followerCount: 2600000,
     birthYear: 1991,
@@ -118,6 +130,7 @@ export const streamerList = [
   {
     img: enesBatur,
     name: "Enes Batur",
+    gender: "Erkek",
     nickName: null,
     followerCount: 16100000,
     birthYear: 1998,
@@ -126,6 +139,7 @@ export const streamerList = [
   {
     img: orkun,
     name: "Orkun Işıtmak",
+    gender: "Erkek",
     nickName: null,
     followerCount: 11000000,
     birthYear: 1996,
@@ -134,6 +148,7 @@ export const streamerList = [
   {
     img: ruhicenet,
     name: "Ruhi Çenet",
+    gender: "Erkek",
     nickName: null,
     followerCount: 8680000,
     birthYear: 1990,
@@ -142,6 +157,7 @@ export const streamerList = [
   {
     img: oguzhanUgur,
     name: "Oğuzhan Uğur",
+    gender: "Erkek",
     nickName: null,
     followerCount: 6800000,
     birthYear: 1984,
@@ -150,6 +166,7 @@ export const streamerList = [
   {
     img: barisOzcan,
     name: "Barış Özcan",
+    gender: "Erkek",
     nickName: null,
     followerCount: 6600000,
     birthYear: 1974,
@@ -158,6 +175,7 @@ export const streamerList = [
   {
     img: danlaBilic,
     name: "Danla Bilic",
+    gender: "Kadın",
     nickName: null,
     followerCount: 6000000,
     birthYear: 1994,
@@ -166,6 +184,7 @@ export const streamerList = [
   {
     img: merveOzkaynak,
     name: "Merve Özkaynak",
+    gender: "Kadın",
     followerCount: 2200000,
     birthYear: 1987,
     category: ["Moda", "Güzellik"],

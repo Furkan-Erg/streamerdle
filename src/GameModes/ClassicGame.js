@@ -10,6 +10,7 @@ import { useKeys } from "rooks";
 function ClassicGame() {
   const informationNames = [
     "İsim",
+    "Cinsiyet",
     "Mahlas",
     "Takipçi",
     "Doğum Yılı",
@@ -104,6 +105,17 @@ function ClassicGame() {
               <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
                 <div
                   className={`${
+                    correctAnswer.gender === streamer.gender
+                      ? "bg-green-600"
+                      : "bg-red-600"
+                  } flip-2 w-full h-full flex justify-center items-center`}
+                >
+                  {streamer.gender}
+                </div>
+              </div>
+              <div className="border-4 border-black rounded-lg w-[4.5rem] h-[4.5rem] md:w-20 md:h-20 overflow-hidden">
+                <div
+                  className={`${
                     correctAnswer.nickName
                       ? streamer.nickName
                         ? "bg-green-600"
@@ -111,7 +123,7 @@ function ClassicGame() {
                       : streamer.nickName
                       ? "bg-red-600"
                       : "bg-green-600"
-                  } flip-2 w-full h-full flex justify-center items-center`}
+                  } flip-3 w-full h-full flex justify-center items-center`}
                 >
                   {streamer.nickName ? "Var" : "Yok"}
                 </div>
@@ -123,7 +135,7 @@ function ClassicGame() {
                     correctAnswer.followerCount === streamer.followerCount
                       ? "bg-green-600"
                       : "bg-red-600"
-                  } flip-3 w-full h-full flex justify-center items-center`}
+                  } flip-4 w-full h-full flex justify-center items-center`}
                 >
                   {streamer.followerCount === correctAnswer.followerCount ? (
                     formatNumber(streamer.followerCount)
@@ -149,7 +161,7 @@ function ClassicGame() {
                     correctAnswer.birthYear === streamer.birthYear
                       ? "bg-green-600"
                       : "bg-red-600"
-                  } flip-4 w-full h-full flex justify-center items-center `}
+                  } flip-5 w-full h-full flex justify-center items-center `}
                 >
                   {streamer.birthYear === correctAnswer.birthYear ? (
                     streamer.birthYear
@@ -180,7 +192,7 @@ function ClassicGame() {
                         )
                       ? "bg-orange-600"
                       : "bg-red-600"
-                  } flip-5  w-full h-full flex justify-center items-center `}
+                  } flip-6  w-full h-full flex justify-center items-center `}
                 >
                   {streamer.category.join(", ")}
                 </div>
