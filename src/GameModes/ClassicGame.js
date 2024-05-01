@@ -35,6 +35,7 @@ function ClassicGame() {
   };
 
   const handleGuess = () => {
+    if (selectedStreamer === "") return;
     if (selectedStreamer.includes(correctAnswer.name)) {
     } else {
     }

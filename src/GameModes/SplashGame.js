@@ -15,7 +15,7 @@ export default function SplashGame() {
     streamerList[Math.floor(Math.random() * streamerList.length)]
   );
   const [tileNumberToUnblur, setTileNumberToUnblur] = useState(
-    Math.floor(Math.random() * 9)
+    Math.floor(Math.random() * 8)
   );
   const [gameState, setGameState] = useState(GameStates.PLAYING);
   const [currentScore, setCurrentScore] = useState(0);
@@ -23,7 +23,7 @@ export default function SplashGame() {
   const [unbluredTiles, setUnbluredTiles] = useState([]);
   const [streamers, setStreamers] = useState(streamerList);
   const setRandomNumber = () => {
-    var randomNumber = Math.floor(Math.random() * 9);
+    var randomNumber = Math.floor(Math.random() * (8 - unbluredTiles.length));
     if (unbluredTiles.includes(randomNumber)) {
       setRandomNumber();
     } else {
@@ -49,6 +49,7 @@ export default function SplashGame() {
     setRandomNumber();
   };
   const handleGuess = () => {
+    if (selectedStreamer === "") return;
     if (selectedStreamer.includes(correctAnswer.name)) {
       setCurrentScore((prev) => prev + 1);
       setGameState(GameStates.WIN);
