@@ -9,6 +9,7 @@ export default function SelectComponent({
 }) {
   const handleSelectionChange = (event, value) => {
     onSelectionChange(value);
+    //TODO: Implement (ENTER) the onSelectionChange function to handle the selected value
   };
   return (
     <Autocomplete

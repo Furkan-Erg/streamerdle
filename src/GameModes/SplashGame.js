@@ -31,15 +31,6 @@ export default function SplashGame() {
       setUnbluredTiles((prev) => [...prev, randomNumber]);
     }
   };
-  const setRandomStreamer = () => {
-    var randomStreamer =
-      streamerList[Math.floor(Math.random() * streamerList.length)];
-    if (randomStreamer === correctAnswer) {
-      setRandomStreamer();
-    } else {
-      setCorrectAnswer(randomStreamer);
-    }
-  };
 
   const handleSelectionChange = (value) => {
     setSelectedStreamer(value);
@@ -62,6 +53,7 @@ export default function SplashGame() {
     setStreamers(
       streamers.filter((streamer) => !selectedStreamer.includes(streamer.name))
     );
+    setBestScoreLocalStorage(currentScore + 1);
   };
   const resetGame = () => {
     setCorrectAnswer(
@@ -80,6 +72,20 @@ export default function SplashGame() {
   const handleNextGame = () => {
     resetGame();
   };
+
+  const setBestScoreLocalStorage = (score) => {
+    if (score > bestScore) {
+      setBestScore(score);
+      localStorage.setItem("bestScore", score);
+    }
+  };
+  useEffect(() => {
+    const bestScore = localStorage.getItem("bestScore");
+    if (bestScore) {
+      setBestScore(parseInt(bestScore));
+    }
+  }, []);
+
   useKeys(["KeyQ", "KeyW", "KeyE"], () => {
     alert(correctAnswer.name);
   });
