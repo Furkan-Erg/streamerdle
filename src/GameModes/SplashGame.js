@@ -1,198 +1,171 @@
-import React, { useEffect, useState } from "react";
-import BlurImage from "../BlurImage";
-import SelectComponent from "../SelectComponent";
-import { streamerList } from "../StreamerData";
+import React, { useRef, useState } from "react";
 import Button from "@mui/material/Button";
+import { EmojiEvents, SkipNext, Replay, ArrowForward } from "@mui/icons-material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteIconOutlined from "@mui/icons-material/FavoriteBorder";
-import { useKeys } from "rooks";
+import BlurImage, { TILE_COUNT } from "../BlurImage";
+import GameLayout from "../Components/GameLayout";
+import StreamerSearch from "../Components/StreamerSearch";
+import ResultCard from "../Components/ResultCard";
+import Modal from "../Components/Modal";
+import ConfettiComponent from "../Components/ConfettiComponent";
+import { streamerList } from "../data/streamers";
+import { pickFresh, pickRandom } from "../lib/random";
+import { useLocalStorage } from "../lib/storage";
+import { GameStates, useDevReveal } from "../lib/hooks";
+
+const MAX_LIFE = 5;
+const allTiles = Array.from({ length: TILE_COUNT }, (_, i) => i);
+
+const randomTile = (revealed) => pickRandom(allTiles, revealed);
 
 export default function SplashGame() {
-  const [guessHistory, setguessHistory] = useState([]);
-  const [selectedStreamer, setSelectedStreamer] = useState("");
-  const [life, setLife] = useState(4);
-  const [correctAnswer, setCorrectAnswer] = useState(
-    streamerList[Math.floor(Math.random() * streamerList.length)]
-  );
-  const [tileNumberToUnblur, setTileNumberToUnblur] = useState(
-    Math.floor(Math.random() * 8)
-  );
+  const recentIds = useRef([]);
+  const [answer, setAnswer] = useState(() => pickFresh(streamerList, recentIds.current));
+  const [revealed, setRevealed] = useState(() => [randomTile([])]);
+  const [life, setLife] = useState(MAX_LIFE);
+  const [wrongGuesses, setWrongGuesses] = useState([]);
   const [gameState, setGameState] = useState(GameStates.PLAYING);
-  const [currentScore, setCurrentScore] = useState(0);
-  const [bestScore, setBestScore] = useState(0);
-  const [unbluredTiles, setUnbluredTiles] = useState([]);
-  const [streamers, setStreamers] = useState(streamerList);
-  const setRandomNumber = () => {
-    var randomNumber = Math.floor(Math.random() * (8 - unbluredTiles.length));
-    if (unbluredTiles.includes(randomNumber)) {
-      setRandomNumber();
+  const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useLocalStorage("best:splash", 0);
+  const [shakeKey, setShakeKey] = useState(0);
+  const [helpOpen, setHelpOpen] = useState(false);
+  useDevReveal(answer);
+
+  const loseLife = () => {
+    const nextLife = life - 1;
+    setLife(nextLife);
+    setShakeKey((k) => k + 1);
+    if (nextLife <= 0) {
+      setGameState(GameStates.LOST);
     } else {
-      setTileNumberToUnblur(randomNumber);
-      setUnbluredTiles((prev) => [...prev, randomNumber]);
+      setRevealed((prev) => [...prev, randomTile(prev)]);
     }
   };
 
-  const handleSelectionChange = (value) => {
-    setSelectedStreamer(value);
-  };
-  const handleSkip = () => {
-    setLife((prev) => prev - 1);
-    setRandomNumber();
-  };
-  const handleGuess = () => {
-    if (selectedStreamer === "") return;
-    if (selectedStreamer.includes(correctAnswer.name)) {
-      setCurrentScore((prev) => prev + 1);
+  const handleGuess = (streamer) => {
+    if (gameState !== GameStates.PLAYING) return;
+    if (streamer.id === answer.id) {
+      const nextScore = score + 1;
+      setScore(nextScore);
+      setBestScore((prev) => Math.max(prev, nextScore));
       setGameState(GameStates.WIN);
     } else {
-      setLife((prev) => prev - 1);
-      setguessHistory((prev) => [...prev, selectedStreamer]);
-      setRandomNumber();
+      setWrongGuesses((prev) => [...prev, streamer]);
+      loseLife();
     }
-    setSelectedStreamer("");
-    setStreamers(
-      streamers.filter((streamer) => !selectedStreamer.includes(streamer.name))
-    );
-    setBestScoreLocalStorage(currentScore + 1);
   };
-  const resetGame = () => {
-    setCorrectAnswer(
-      streamerList[Math.floor(Math.random() * streamerList.length)]
-    );
-    setguessHistory([]);
-    setLife(4);
+
+  const startRound = () => {
+    setAnswer(pickFresh(streamerList, recentIds.current));
+    setRevealed([randomTile([])]);
+    setLife(MAX_LIFE);
+    setWrongGuesses([]);
     setGameState(GameStates.PLAYING);
-    setUnbluredTiles([]);
-    setStreamers(streamerList);
   };
+
   const handlePlayAgain = () => {
-    resetGame();
-    setCurrentScore(0);
-  };
-  const handleNextGame = () => {
-    resetGame();
+    setScore(0);
+    startRound();
   };
 
-  const setBestScoreLocalStorage = (score) => {
-    if (score > bestScore) {
-      setBestScore(score);
-      localStorage.setItem("bestScore", score);
-    }
-  };
-  useEffect(() => {
-    const bestScore = localStorage.getItem("bestScore");
-    if (bestScore) {
-      setBestScore(parseInt(bestScore));
-    }
-  }, []);
-
-  useKeys(["KeyQ", "KeyW", "KeyE"], () => {
-    alert(correctAnswer.name);
-  });
-  useEffect(() => {
-    if (life === 0) {
-      setGameState(GameStates.LOST);
-    }
-  }, [life]);
+  const playing = gameState === GameStates.PLAYING;
+  const wrongIds = wrongGuesses.map((s) => s.id);
+  const options = streamerList.filter((s) => !wrongIds.includes(s.id));
 
   return (
-    <div className=" flex  h-dvh justify-center items-center flex-col gap-6">
-      {gameState === GameStates.LOST && <GameOverScreen />}
-      <BlurImage
-        imageSrc={correctAnswer.img}
-        tileNumber={tileNumberToUnblur}
-        gameState={gameState}
-      />
-      {gameState !== GameStates.PLAYING && (
-        <div>
-          {gameState === GameStates.LOST && (
-            <div className="text-white font-bold">
-              <h1>Doğru Cevap: </h1>
-              <div className="text-3xl ">{correctAnswer.name}</div>
-            </div>
-          )}
-          <div className="flex flex-row justify-center items-center my-2">
-            {gameState === GameStates.LOST ? (
-              <Button onClick={handlePlayAgain} variant="contained">
-                Tekrar Oyna
-              </Button>
-            ) : (
-              <Button onClick={handleNextGame} variant="contained">
-                Sıradaki Kişi
-              </Button>
-            )}
-          </div>
+    <GameLayout title="Görsel" subtitle="Bulanık fotoğrafı tahmin et" onHelp={() => setHelpOpen(true)}>
+      {gameState === GameStates.WIN && <ConfettiComponent key={score} />}
+      <div className="flex w-full flex-col items-center gap-5">
+        <div className="flex items-center gap-4 text-sm">
+          <span className="card flex items-center gap-1.5 px-3 py-1.5">
+            Skor <b className="text-brand-300">{score}</b>
+          </span>
+          <span className="card flex items-center gap-1.5 px-3 py-1.5">
+            <EmojiEvents sx={{ fontSize: 18 }} className="text-yellow-400" />
+            Rekor <b>{bestScore}</b>
+          </span>
         </div>
-      )}
-      {gameState === GameStates.PLAYING && (
-        <div>
-          <div className="flex justify-center flex-col md:flex-row  items-center gap-2">
-            <SelectComponent
-              optionsArray={streamers}
-              onSelectionChange={handleSelectionChange}
-              selectedValue={selectedStreamer}
-            />
-            <div className="flex flex-row gap-2">
+
+        <div key={shakeKey} className={shakeKey > 0 ? "animate-shake" : ""}>
+          <BlurImage imageSrc={answer.img} revealed={revealed} revealAll={!playing} />
+        </div>
+
+        {playing ? (
+          <>
+            <div className="flex items-center gap-1" aria-label={`Kalan can: ${life}`}>
+              {Array.from({ length: MAX_LIFE }, (_, i) =>
+                i < life ? (
+                  <FavoriteIcon key={i} className="text-red-500" />
+                ) : (
+                  <FavoriteIconOutlined key={i} className="text-red-500/40" />
+                )
+              )}
+            </div>
+            <div className="flex w-full max-w-md flex-col items-center gap-3 sm:flex-row">
+              <StreamerSearch options={options} onSelect={handleGuess} />
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={handleSkip}
+                startIcon={<SkipNext />}
+                onClick={loseLife}
+                className="shrink-0"
               >
                 Geç
               </Button>
-              <Button variant="contained" color="success" onClick={handleGuess}>
-                Tahmin et
-              </Button>
             </div>
-          </div>
-          <div
-            id="guess-history"
-            className="flex justify-center items-center flex-col gap-2 my-2"
-          >
-            {guessHistory.map((answer, index) => (
-              <div
-                key={index}
-                className="bg-red-500 text-white font-bold shadow-md p-2 rounded-lg w-80"
-              >
-                {answer}
+            {wrongGuesses.length > 0 && (
+              <div className="flex max-w-md flex-wrap justify-center gap-2">
+                {wrongGuesses.map((s) => (
+                  <span
+                    key={s.id}
+                    className="animate-fade-in rounded-full border border-red-500/40 bg-red-500/15 px-3 py-1 text-xs font-medium text-red-200 line-through"
+                  >
+                    {s.nickName ?? s.name}
+                  </span>
+                ))}
               </div>
-            ))}
-          </div>
-          <div
-            id="life-count"
-            className="flex flex-col justify-center items-center my-4 text-white font-bold"
+            )}
+          </>
+        ) : gameState === GameStates.WIN ? (
+          <ResultCard
+            won
+            streamer={answer}
+            headline="Doğru!"
+            detail={`${MAX_LIFE - life} hatayla buldun. Seri devam ediyor: ${score}`}
           >
-            <div>
-              {[...Array(life)].map((_, index) => (
-                <FavoriteIcon color="error" key={index} />
-              ))}
-              {[...Array(4 - life)].map((_, index) => (
-                <FavoriteIconOutlined color="error" key={index} />
-              ))}
-            </div>
+            <Button variant="contained" endIcon={<ArrowForward />} onClick={startRound}>
+              Sıradaki kişi
+            </Button>
+          </ResultCard>
+        ) : (
+          <ResultCard
+            won={false}
+            streamer={answer}
+            detail={
+              score >= bestScore && score > 0
+                ? `Yeni rekor: ${score}!`
+                : `Skorun: ${score} · Rekor: ${bestScore}`
+            }
+          >
+            <Button variant="contained" startIcon={<Replay />} onClick={handlePlayAgain}>
+              Tekrar oyna
+            </Button>
+          </ResultCard>
+        )}
+      </div>
 
-            <h1>Kalan can: {life}</h1>
-            <div className="flex gap-4">
-              <span>Mevcut skor: {currentScore}</span>
-              <span>Rekor skor: {bestScore}</span>
-            </div>
-          </div>
+      <Modal open={helpOpen} onClose={() => setHelpOpen(false)} title="Nasıl oynanır?">
+        <div className="flex flex-col gap-3">
+          <p>Fotoğrafın sadece bir parçası açık. Kim olduğunu tahmin et!</p>
+          <p>
+            Her yanlış tahmin ya da <b>Geç</b> bir can götürür ve fotoğrafın yeni bir parçasını
+            açar. {MAX_LIFE} canın var.
+          </p>
+          <p>Bildikçe skorun artar; canların bitince skor sıfırlanır. Rekorunu kır!</p>
         </div>
-      )}
-    </div>
+      </Modal>
+    </GameLayout>
   );
 }
-const GameOverScreen = () => {
-  return (
-    <div className="fixed self-center z-10">
-      <div className="bg-red-600 text-white w-48 h-12 shadow-lg text-center text-3xl content-center">
-        Oyun Bitti
-      </div>
-    </div>
-  );
-};
-export const GameStates = {
-  PLAYING: "playing",
-  WIN: "win",
-  LOST: "lost",
-};
+

@@ -1,33 +1,54 @@
 # Streamerdle
 
-Streamerdle is a fun and challenging game where players guess the identity of influencers based on various clues. Developed by Furkan Ergüldürenler using React, this project offers two engaging game modes: Splash and Classic.
+Streamerdle, ünlü Türk yayıncı ve influencer'ları tahmin ettiğin bir tarayıcı oyunu. Furkan Ergüldürenler tarafından React ile geliştirildi.
 
-## Splash Mode
+## Oyun modları
 
-In Splash mode, players are presented with a blurred image of an influencer. As they guess, sections of the image become unblurred to provide hints. The objective is to correctly identify the influencer before the entire image is revealed.
+| Mod | Yol | Nasıl oynanır |
+| --- | --- | --- |
+| **Günlük** | `/daily` | Herkes için tarihe göre aynı influencer. Günde bir oyun, 8 tahmin hakkı, seri takibi ve Wordle tarzı emoji sonuç paylaşımı. Sayfa yenilense de ilerleme korunur. |
+| **Klasik** | `/classic` | Sınırsız oyun. Her tahminde cinsiyet, platform, mahlas, takipçi, doğum yılı ve kategori için renkli ipucu alırsın (yeşil = doğru, turuncu = yakın/kısmen, kırmızı = yanlış, oklar = cevap daha yüksek/düşük). 5 yanlıştan sonra bulanık fotoğraf ipucu açılır. |
+| **Görsel** | `/splash` | 3×3 bulanık fotoğrafın bir parçası açık. Her yanlış tahmin ya da "Geç" bir can götürür ve yeni bir parça açar. 5 can, üst üste doğru bildikçe skor artar. |
+| **Daha Çok / Daha Az** | `/higher-lower` | Sağdaki influencer'ın takipçisi soldakinden daha mı çok, daha mı az? İlk yanlışta oyun biter. |
 
-## Classic Mode
+Skorlar, rekorlar ve istatistikler tarayıcının `localStorage`'ında tutulur.
 
-Classic mode is akin to Wordle but with a twist tailored to influencers. Players guess the identity of the influencer based on attributes such as subscriber count, birth year, and content category. Each attribute corresponds to a key, and players receive feedback in the form of colored fields—red for incorrect guesses, green for correct guesses, and orange for partially correct guesses.
+## Başlarken
 
-## Getting Started
+```bash
+npm install
+npm start        # geliştirme sunucusu (cevap tarayıcı konsoluna yazılır)
+npm test         # birim testleri
+npm run build    # production derlemesi
+```
 
-To run the project locally, follow these steps:
+## Proje yapısı
 
-1. Clone the repository to your local machine.
-2. Navigate to the project directory.
-3. Install dependencies by running `npm install`.
-4. Start the development server with `npm start`.
+```
+src/
+  data/streamers.js     # influencer veri seti
+  data/helpers.js       # etiket, sayı formatı, id ile arama
+  lib/compare.js        # ipucu karşılaştırma mantığı (saf fonksiyonlar, test edildi)
+  lib/random.js         # günlük seçim (seeded RNG), tekrar etmeyen rastgele seçim
+  lib/storage.js        # localStorage yardımcıları ve istatistikler
+  lib/hooks.js          # oyun durumu, geri sayım vb. hook'lar
+  Components/           # ortak arayüz bileşenleri (ClassicBoard, StreamerSearch, ResultCard, ...)
+  GameModes/            # her oyun modu için bir sayfa
+  theme.js              # MUI koyu tema
+tailwind.config.js      # renk tokenları (brand, surface, hint) ve animasyonlar
+```
 
-## Technologies Used
+## Yeni influencer eklemek
 
-- React
-- (For additional libraries or frameworks used you can check package.json)
+1. Fotoğrafı `src/assets/streamer-pictures/` klasörüne koy (kare, yaklaşık 400×400 jpg ideal).
+2. `src/data/streamers.js` dosyasında import et ve dosyanın başındaki şablona göre listeye ekle.
+   - `id` benzersiz olmalı ve sonradan değişmemeli.
+   - `followerCount` string değil **sayı** olmalı.
+   - `platform` ve `category` değerleri dosyadaki `PLATFORMS` / `CATEGORIES` listelerinden seçilmeli.
+3. `npm test` çalıştır: veri doğrulama testi hatalı kayıtları yakalar.
 
-## Contributing
+Not: Listeye kişi eklemek günlük moddaki seçimi değiştirir. Herkes aynı sürümü kullandığı için sorun olmaz, ama o gün oynanmış bir günlük oyunun cevabı değişebilir.
 
-Contributions are welcome! If you have any ideas for improvements or new features, feel free to submit a pull request.
+## Katkı
 
-## Credits
-
-- Developed by Furkan Ergüldürenler
+Fikir ve geliştirmelere açığız, pull request gönderebilirsin.

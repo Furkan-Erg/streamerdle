@@ -1,37 +1,42 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
 import "./index.css";
 import App from "./App";
+import theme from "./theme";
 import reportWebVitals from "./reportWebVitals";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./HomePage";
 import ClassicGame from "./GameModes/ClassicGame";
 import SplashGame from "./GameModes/SplashGame";
+import DailyGame from "./GameModes/DailyGame";
+import HigherLowerGame from "./GameModes/HigherLowerGame";
+import { migrateLegacyStorage } from "./lib/storage";
+
+migrateLegacyStorage();
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "classic",
-    element: <ClassicGame />,
-  },
-  {
-    path: "splash",
-    element: <SplashGame />,
+    element: <App />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "daily", element: <DailyGame /> },
+      { path: "classic", element: <ClassicGame /> },
+      { path: "splash", element: <SplashGame /> },
+      { path: "higher-lower", element: <HigherLowerGame /> },
+      { path: "*", element: <Navigate to="/" replace /> },
+    ],
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <App>
-    <RouterProvider router={router} />
-  </App>
+  <React.StrictMode>
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
