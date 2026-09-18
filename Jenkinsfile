@@ -28,6 +28,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
+                    git config --global --add safe.directory /home/furkan/streamerdle
                     cd /home/furkan/streamerdle
                     git pull
                     docker compose up -d --build
